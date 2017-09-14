@@ -1,0 +1,39 @@
+<ion-side-menus enable-menu-with-back-views="true">
+    <ion-side-menu-content>
+        <ion-nav-bar class="bar-app" ng-class="{expanded: isExpanded, 'has-header-fab-left': hasHeaderFabLeft, 'has-header-fab-right': hasHeaderFabRight}" align-title="left">
+        <!--  <ion-nav-back-button class="no-text">
+            </ion-nav-back-button>
+		-->
+		
+            <ion-nav-buttons side="left">
+                <button class="button button-icon green-text button-clear ion-android-menu " menu-toggle="left">
+                </button>
+            </ion-nav-buttons>
+	
+        </ion-nav-bar>
+        <ion-nav-view name="fabContent"></ion-nav-view>
+        <ion-nav-view name="menuContent" class="expanded" ></ion-nav-view>
+    </ion-side-menu-content>
+
+    <ion-side-menu side="left">
+		<ion-header-bar class="green-bg expanded">
+            <span class="avatar" style="background: url('img/logo.png'); background-size: cover;"></span>
+            <h2 class="pretty-thai-text light-text">{{firstname}} {{lastname}}</h2>
+        </ion-header-bar>
+        <ion-content class="side-menu has-expanded-header">
+            <ion-list >
+				<ion-item menu-close ui-sref="#"  class="item-icon-left pretty-thai-text">
+                   <i class="icon material-icons green-text" >&#xE853;</i>ข้อมูลผู้ใช้
+                </ion-item>
+				<ion-item menu-close ui-sref="#"  class="item-icon-left pretty-thai-text">
+                   <i class="icon material-icons green-text" >&#xE8B8;</i>ตั้งค่าใช้งาน
+                </ion-item>
+                <ion-item menu-close ui-sref="app.logout" class="item-icon-left  pretty-thai-text">
+                    <i class="icon material-icons green-text" >&#xE879;</i> ออกจากระบบ
+                </ion-item>
+
+			</ion-list>
+        </ion-content>
+    </ion-side-menu>
+
+</ion-side-menus>

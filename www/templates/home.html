@@ -1,0 +1,113 @@
+<ion-view view-title="ภาพรวมสุขภาพ">
+    <ion-content  ng-class="{expanded:$scope.isExpanded}" style="background: url(img/background.png) center; background-size: cover; align:center; vertical-align: middle;">
+		<h5 class="pretty-thai-text center-text"> {{firstname}} {{lastname}}</h5>
+		<div class="row outset-shadow" style="background: rgba(0, 0, 0, 0.1);text-align: center; ">
+			<div class="col">
+				 <ng-gauge  size="80" type="full" thick="3" min="0" max="100" value="dataCompleteness" cap="round" label=""  foreground-color="rgba(116,193,191, 0.8)" background-color="rgba(0,0,0, 0.2)" append=" %" ></ng-gauge>
+				<small class="pretty-thai-text">ข้อมูลสมบูรณ์</small>
+				<BR><BR>
+				<i class="material-icons green-text">&#xEB4A;</i><BR/>
+				 <small class="pretty-thai-text">สูบบุหรี่</small><BR/><BR/>
+				 <img src="img/ic_drink_2.png" class="opacity_img"><BR/>
+				 <small class="pretty-thai-text">ดิ่มแอลกอฮอล์</small>
+			</div>
+			<div class="col">
+				<img src="img/body_0.png">
+			</div>
+			<div class="col">
+				<ng-gauge  size="80" type="full" thick="3" min="0" max="150" value="profile.age" cap="round" label=""  foreground-color="rgba(116,193,191, 0.8)" background-color="rgba(0,0,0, 0.2)" append=" ปี" ></ng-gauge>
+				 <BR/><small class="pretty-thai-text">อายุ</small>
+				 <BR/><BR/>
+				  <img src="img/ic_male.png" class="opacity_img"><BR/>
+				 <small class="pretty-thai-text">เพศ</small>
+				 
+				
+			</div>
+		</div>
+		<div class="list" >
+				<div collection-repeat="summary in summaryList" class="padding-left">
+                <a class="item item-thumbnail-left item-icon-right" ng-if="summary.measures.length!=0"  ui-sref="app.addPatient">
+                    <img src="img/{{summary.category.icon}}_{{summary.level}}.png">
+					
+                    <h2 class="pretty-thai-text">{{summary.category.nameTH}}</h2>
+					<div class="row">
+						<div class="col" ng-if="summary.level == 0">
+						    <small class="pretty-thai-text">ปรกติ</small><BR/>
+							<i class="material-icons green-text">&#xE90F;</i>
+						</div>
+						<div class="col" ng-if="summary.level == 1">
+						    <small class="pretty-thai-text">เผ้าระวัง</small><BR/>
+							<i class="material-icons yellow-text">&#xE90F;</i>
+						</div>
+						<div class="col" ng-if="summary.level == 2">
+						    <small class="pretty-thai-text">เสี่ยง</small><BR/>
+							<i class="material-icons orange-text">&#xE90F;</i>
+						</div>
+						<div class="col" ng-if="summary.level == 3">
+						    <small class="pretty-thai-text">อันตราย</small><BR/>
+							<i class="material-icons red-text">&#xE90F;</i>
+						</div>
+						
+						<div class="col">
+						   <small class="pretty-thai-text">แนวโน้ม</small><BR/>
+						   <i class="material-icons dark">&#xE8E5;</i>
+						</div>
+					</div>
+					<i class="icon material-icons green-text">&#xE315;</i>
+                </a>
+				</div>
+		</div>
+		<!--
+		<div class="list">
+                <a class="item item-thumbnail-left item-icon-right" ui-sref="app.addPatient">
+                    <img src="img/ic_body_0.png">
+					
+                    <h2 class="pretty-thai-text">ร่างกาย</h2>
+					<div class="row">
+						<div class="col">
+						    <small class="pretty-thai-text">ปรกติ</small><BR/>
+							<i class="material-icons green-text">&#xE90F;</i>
+						</div>
+						<div class="col">
+						   <small class="pretty-thai-text">แนวโน้ม</small><BR/>
+						   <i class="material-icons dark">&#xE8E5;</i>
+						</div>
+					</div>
+					<i class="icon material-icons green-text">&#xE315;</i>
+                </a>
+                <a class="item item-thumbnail-left item-icon-right">
+                    <img src="img/ic_heart_1.png">
+                    <h2 class="pretty-thai-text">ไหลเวียนโลหิต</h2>
+					<div class="row">
+						<div class="col">
+						    <small class="pretty-thai-text">เผ้าระวัง</small><BR/>
+							<i class="material-icons yellow-text">&#xE90F;</i>
+						</div>
+						<div class="col">
+						   <small class="pretty-thai-text">แนวโน้ม</small><BR/>
+						   <i class="material-icons dark">&#xE8E4;</i>
+						</div>
+					</div>
+					<i class="icon material-icons green-text">&#xE315;</i>
+                </a>
+                </a>
+                <a class="item item-thumbnail-left item-icon-right">
+                    <img src="img/ic_urinal_3.png">
+                    <h2 class="pretty-thai-text">ขับถ่าย</h2>
+					<div class="row">
+						<div class="col">
+						    <small class="pretty-thai-text">อันตราย</small><BR/>
+							<i class="material-icons orange-text">&#xE90F;</i>
+						</div>
+						<div class="col">	
+						   <small class="pretty-thai-text">แนวโน้ม</small><BR/>
+						   <i class="material-icons dark">&#xE8E3;</i>
+						</div>
+					</div>
+					<i class="icon material-icons green-text">&#xE315;</i>
+                </a>
+			</a>
+       </div>
+	   -->
+    </ion-content>
+</ion-view>

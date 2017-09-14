@@ -1,0 +1,24 @@
+<ion-view view-title="Login"  class="login-content">
+    <ion-content style="background: url(img/background-login.png) center; background-size: cover; align:center; vertical-align: middle;">
+       <div>
+           <div class="app-icon"></div> 
+		  <h2 class="appname pretty-slim-text dark-text">Smart Healthcare</h2> 
+		   <h5 class="light-text pretty-slim-text"></h5>
+			<div class="list padding">
+				<label class="item item-input item-icon-left item-floating-label pretty-thai-text" style="background: rgba(255, 255, 255, 0.7);">
+                   <i class="icon ion-android-person placeholder-icon"></i><input type="text"  class="dark-text pretty-thai-text center-text" placeholder="ชื่อผู้ใช้งาน" ng-model="formData.username">
+				</label>
+				<label class="item item-input item-icon-left item-floating-label pretty-thai-text" style="background: rgba(255, 255, 255, 0.6);">
+                    <i class="icon ion-key placeholder-icon"></i><input type="password"  class="dark-text pretty-thai-text center-text" placeholder="รหัสผ่าน"  ng-model="formData.password">
+				</label>
+				<div class="padding"></div>
+				 <div class=" login-button">
+				<button ng-click="login()" class="button  pretty-thai-text icon-left ion-log-in button-yellow ink">เข้าสู่ระบบ</button>
+				<button ng-click="register()" class="button pretty-thai-text icon-left ion-android-create button-orange ink">ลงทะเบียน</button>
+				</div>
+		   </div>
+			<div class="bottom-text dark-text" nowrap>All rights reserved 2017</div>
+		
+		</div>
+    </ion-content>
+</ion-view>
