@@ -32,7 +32,7 @@ a:link,a:visited,a:hover,a:active  {
     text-shadow: 0 1px 0px #000;
 }
 .appname {
-    font-size: 30px;
+    font-size: 70px;
 	color: #fff;
 	font-family: 'Archivo Black', sans-serif;
 
@@ -96,7 +96,7 @@ margin-bottom: 10px;
 
 
 .side-menu {
-	background-color: #EEE;
+	background-color: #999;
 	/*background: url(../img/blue-bg.jpg) center; 
 	background-size: cover; 
 	align:center; 
@@ -126,6 +126,17 @@ margin-bottom: 10px;
 .big-text{
 	font-size: 30px;
 	opacity: 1;
+}
+.medium-text{
+	font-size: 17px;
+	opacity: 1;
+}
+input.big-text
+{
+	font-size: 30px;
+	color: #4b9d99;
+	opacity: 0.7;
+	 font-family: 'Prompt', sans-serif;
 }
 .center-text{
 	text-align: center;
@@ -338,10 +349,19 @@ p {
     background-color: #fff;
     background: url('../img/logo.png') center;
     background-size: cover;
-    height: 100px;
+    height: 250px;
     margin: 0 auto;
-    width: 100px;
+    width: 250px;
 }
+.app-icon-small {
+    background-color: #fff;
+    background: url('../img/logo.png') center;
+    background-size: cover;
+    height: 150px;
+    margin: 0 auto;
+    width: 150px;
+}
+
 
 .menu-icon {
     background: url('../img/logo.png') center;
@@ -502,12 +522,22 @@ p {
 }
 .button.button-green {
     border-color: #111;
-    background-color: #96a341;
+    background-color: #4b9d99;
     color: #fff; 
 }
+.button.button-switch-green{
+	background-color: #FFF;
+}
+.button.button-switch-green:disabled, .button.button-switch-green[disabled=disabled] {
+    border-color: #111;
+    background-color: #DDD;
+    color: #4b9d99; 
+	opacity:0.7;
+}
+
 .button.button-green:hover {
    color: #fff;
-   background-color: #c0ce64;
+   background-color: #4b9d99;
    text-decoration: none; 
 }
 
@@ -522,6 +552,7 @@ p {
     background-color: #e38708;
     color: #fff; 
 }
+
 .button.button-yellow:hover {
    color: #fff;
    background-color: #dfa85d;
@@ -618,7 +649,7 @@ p {
 }
 
 ion-item.item.itemlist{
-  background-color: #fff;
+ /* background-color: #fff;*/
  
   border-color: #ededed;
   border-style: solid;
@@ -626,7 +657,7 @@ ion-item.item.itemlist{
 }
 
 ion-item.item.itemlist div{
-	background-color: #fff;
+/*	background-color: #fff; */
 }
 
 .new-image{
@@ -694,145 +725,7 @@ select::-ms-expand {
   font-size: 20px;
   text-align: center;
 }
-/*
-progress {
-	-webkit-appearance: progress-bar;
-	box-sizing: border-box;
-	display: inline-block;
-	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25) inset;
-}*/
-progress {
-  text-align: left;
-  height: 1.5em;
-	margin: 0px auto;
-  width: 100%;
-  -webkit-appearance: none;
-  border: none;
-  
-  /* Set the progressbar to relative */
-  position:relative;
-}
-progress:before {
-  content: attr(data-label);
-  font-size: 0.8em;
-  font-family: 'Open Sans Condensed', sans-serif;
-  vertical-align: 0;
-  
-  /*Position text over the progress bar */
-  position:absolute;
-  left:15px;
-  right:0;
-}
-/* All good till now. Now we'll style the background */
-progress::-webkit-progress-bar {
-	background: rgba(0, 0, 0, 0.4);
-	border-radius: 5px;
-	padding: 2px;
-	box-shadow: 0 1px 0px 0 rgba(255, 255, 255, 0.2);
-}
 
-/* Now the value part */
-progress::-webkit-progress-value {
-	border-radius: 5px; 
-	box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.4);
-	background:
-		-webkit-linear-gradient(top, rgba(255, 255, 255, 0.1), rgba(0, 0, 0, 0.1)),
-		-webkit-linear-gradient(left, #8F9BC1, #8F9BC1);
-	
-	/* Looks great, now animating it */
-	background-size: 25px 14px, 100% 100%, 100% 100%;
-	-webkit-animation: move 5s linear 0 infinite;
-}
-input[type=range] {
-  -webkit-appearance: none;
-  width: 100%;
-  margin: 3.3px 0;
-}
-input[type=range]:focus {
-  outline: none;
-}
-input[type=range]::-webkit-slider-runnable-track {
-  width: 100%;
-  height: 11.4px;
-  cursor: pointer;
-  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
-  background: rgba(179, 194, 242, 0.78);
-  border-radius: 12.2px;
-  border: 0.4px solid #010101;
-}
-input[type=range]::-webkit-slider-thumb {
-  box-shadow: 0.9px 0.9px 1px #000031, 0px 0px 0.9px #00004b;
-  border: 0px solid #00001e;
-  height: 18px;
-  width: 18px;
-  border-radius: 15px;
-  background: #ffffff;
-  cursor: pointer;
-  -webkit-appearance: none;
-  margin-top: -3.7px;
-}
-input[type=range]:focus::-webkit-slider-runnable-track {
-  background: rgba(201, 211, 246, 0.78);
-}
-input[type=range]::-moz-range-track {
-  width: 100%;
-  height: 11.4px;
-  cursor: pointer;
-  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
-  background: rgba(179, 194, 242, 0.78);
-  border-radius: 12.2px;
-  border: 0.4px solid #010101;
-}
-input[type=range]::-moz-range-thumb {
-  box-shadow: 0.9px 0.9px 1px #000031, 0px 0px 0.9px #00004b;
-  border: 0px solid #00001e;
-  height: 18px;
-  width: 18px;
-  border-radius: 15px;
-  background: #ffffff;
-  cursor: pointer;
-}
-input[type=range]::-ms-track {
-  width: 100%;
-  height: 11.4px;
-  cursor: pointer;
-  background: transparent;
-  border-color: transparent;
-  color: transparent;
-}
-input[type=range]::-ms-fill-lower {
-  background: rgba(157, 177, 238, 0.78);
-  border: 0.4px solid #010101;
-  border-radius: 24.4px;
-  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
-}
-input[type=range]::-ms-fill-upper {
-  background: rgba(179, 194, 242, 0.78);
-  border: 0.4px solid #010101;
-  border-radius: 24.4px;
-  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
-}
-input[type=range]::-ms-thumb {
-  box-shadow: 0.9px 0.9px 1px #000031, 0px 0px 0.9px #00004b;
-  border: 0px solid #00001e;
-  height: 18px;
-  width: 18px;
-  border-radius: 15px;
-  background: #ffffff;
-  cursor: pointer;
-  height: 11.4px;
-}
-input[type=range]:focus::-ms-fill-lower {
-  background: rgba(179, 194, 242, 0.78);
-}
-input[type=range]:focus::-ms-fill-upper {
-  background: rgba(201, 211, 246, 0.78);
-}
-
-@-webkit-keyframes move {
-	0% {background-position: 0px 0px, 0 0, 0 0}
-	100% {background-position: -100px 0px, 0 0, 0 0}
-}
 
 .scroll {
     height: 100%;
@@ -936,3 +829,95 @@ background: #e8e8e8; }
 padding-left: 56px; 
 }
 md-input input { background-color: inherit; }
+
+.item.wrap, .item-content.wrap {
+white-space: normal;
+padding: 0px;
+}
+.item {
+	padding: 0px;
+	
+}
+
+.custom {
+	background-color: #FFF !important;
+}
+.custom ion-item{
+	background-color: #FFF !important;
+}
+.custom  .item-complex .item-content, .dark .item-radio .item-content {
+	background-color: #FFF !important;
+}
+
+
+.img-circle-small {
+    border-radius: 50%;
+	height: 50px;
+	width: 50px;
+	z-index: 99;
+	background-color: #FFF
+}
+
+time.icon
+{
+  font-size: 0.7em; /* change icon size */
+  display: block;
+  position: relative;
+  width: 6.5em;
+  height: 6.5em;
+  background-color: #fff;
+  margin: 0em auto;
+  border-radius: 0.5em;
+-webkit-box-shadow: 3px 3px 21px -5px rgba(0,0,0,0.75);
+-moz-box-shadow: 3px 3px 21px -5px rgba(0,0,0,0.75);
+box-shadow: 3px 3px 21px -5px rgba(0,0,0,0.75);
+  overflow: hidden;
+  -webkit-backface-visibility: hidden;
+  -webkit-transform: rotate(0deg) skewY(0deg);
+  -webkit-transform-origin: 50% 10%;
+  transform-origin: 50% 10%;
+}
+
+time.icon *
+{
+  display: block;
+  width: 100%;
+  font-size: 1em;
+  font-weight: bold;
+  font-style: normal;
+  text-align: center;
+}
+
+time.icon strong
+{
+  position: absolute;
+  top: 0em;
+  padding: -1em 0;
+  color: #fff;
+  background-color: #fd9f1b;
+  border-bottom: 1px dashed #f37302;
+  box-shadow: 0 2px 0 #fd9f1b;
+}
+
+time.icon em
+{
+  position: absolute;
+  bottom: -0.3em;
+  color: #fd9f1b;
+}
+
+time.icon span
+{
+  width: 100%;
+  font-size: 2.4em;
+  letter-spacing: -0.05em;
+  padding-top: 1.2em;
+  color: #2f2f2f;
+}
+
+.inset-shadow-top
+{
+-webkit-box-shadow: inset 0px 4px 14px -5px rgba(128,126,128,1);
+-moz-box-shadow: inset 0px 4px 14px -5px rgba(128,126,128,1);
+box-shadow: inset 0px 4px 14px -5px rgba(128,126,128,1);
+}

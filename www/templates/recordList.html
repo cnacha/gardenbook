@@ -1,0 +1,30 @@
+<ion-view view-title="รายการบันทึก">
+	<ion-nav-buttons side="left">
+			<button ui-sref="app.recordForm({categoryId: '{{categoryId}}'})"  class="button button-fab button-fab-top-right button-brand"><i class="icon ion-plus"></i></button>
+	</ion-nav-buttons>
+    <ion-content  ng-class="{expanded:isExpanded}" >
+		 <ion-list show-delete="false" can-swipe="true" ng-repeat="log in logList">
+			<ion-item class="list-item-content" href="#" class="item item-text-wrap" style="background-color: #FFF"  >
+				<div class="row"> 
+					<div class="col col-33">
+						<time datetime="{{log.logDate}}" class="icon">
+						  <em>{{log.logDay}}</em>
+						  <strong>{{log.logMonth}}</strong>
+						  <span>{{log.logDateNumber}}</span>
+						</time>
+					</div>
+					<div class="col col-center pretty-thai-text" ng-switch="log.source">
+						<h3 ng-switch-when="'manual'" class="pretty-thai-text green-text">บันทึกเอง</h3>
+						<h3 ng-switch-when="'integration'" class="pretty-thai-text green-text">นำเข้าจากโรงพยาบาล<BR/>{{log.integrationSource}}</h3>
+						<h3 ng-switch-default class="pretty-thai-text green-text">บันทึกเอง</h3>
+						<small>เวลา {{log.logTime}}</small>
+					</div>
+					<div class="col col-10 col-center right-text"><i class="icon ion-chevron-right green-text" ></i></div>
+				</div>
+				<ion-option-button class="button-green icon ion-edit"></ion-option-button>
+				<ion-option-button class="button-yellow icon ion-trash-a"></ion-option-button>
+			</ion-item>
+	</ion-list >
+    </ion-content>
+	
+</ion-view>

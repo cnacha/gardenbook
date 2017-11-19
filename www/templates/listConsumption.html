@@ -1,0 +1,33 @@
+<ion-view view-title="{{toMealTxt(mealtype)}}">
+    <ion-content class="custom " ng-class="{expanded:isExpanded}">
+		<div ng-if="cList.length ==0" class="center-text padding">
+		<span  class="pretty-thai-text dark-text"><i class="material-icons">&#xE002;</i><BR>ไม่พบการบันทึก<BR>โปรดกดปุ่ม + ด้านล่างเพื่อบันทึก</span>
+		</div>
+		<ion-list show-delete="false" show-reorder="false" can-swipe="true" >
+				<ion-item collection-repeat="item in cList" class="item-icon-right"  ui-sref="" >
+				  <div class="row">
+						<div class="col">
+							<img class="img-circle-small" ng-if="item.photoPath != null" src='{{toImageURL(item.id)}}'>
+							<img class="img-circle-small" ng-if="item.photoPath == null" src='img/meal-{{mealtype}}.png'>
+						</div>
+						<span class="col dark-text col-50 col-center  pretty-thai-text"> {{item.name}}</span>
+						<span class="col col-center dark-text  big-text pretty-slim-text">{{item.calories}} <small>Kcal</small></span>
+				   </div>
+				  
+					<i class="icon material-icons dark-text ">&#xE315;</i>
+				 
+				  <ion-option-button class="button-energized big-text ion-android-delete pretty-thai-text" ng-click="delItem(item)">
+				  </ion-option-button>
+				  <ion-option-button ng-if="item.photoPath != null" class="button-calm big-text ion-android-share-alt pretty-thai-text" ng-click="shareItem(item)">
+				  </ion-option-button> 
+				  <ion-option-button class="button-balanced big-text ion-android-image pretty-thai-text" ng-click="chooseImage(item)">
+				  </ion-option-button> 
+				</ion-item>
+		</ion-list>
+    <div class="padding center-text light-text" ng-show="cList.length == 0">
+      <i class="icon big-icon ion-alert-circled"></i>
+      <p class="pretty-thai-text">ไม่พบการบันทึก</p>
+    </div>
+
+    </ion-content>
+</ion-view>

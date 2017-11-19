@@ -2881,7 +2881,7 @@ a {
 .item,
 .item-complex .item-content,
 .item-radio .item-content {
-  background-color: transparent; }
+  }
 
 .dark-bg h2,
 .item.dark-bg h2 {

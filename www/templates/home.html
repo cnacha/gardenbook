@@ -1,113 +1,114 @@
-<ion-view view-title="ภาพรวมสุขภาพ">
+<ion-view view-title="บันทึกแคลอรี่">
+	<ion-nav-buttons side="left">
+                <button class="button button-icon button-clear ion ion-log-out" ui-sref="app.logout">
+                </button>
+     </ion-nav-buttons>
     <ion-content  ng-class="{expanded:$scope.isExpanded}" style="background: url(img/background.png) center; background-size: cover; align:center; vertical-align: middle;">
-		<h5 class="pretty-thai-text center-text"> {{firstname}} {{lastname}}</h5>
-		<div class="row outset-shadow" style="background: rgba(0, 0, 0, 0.1);text-align: center; ">
-			<div class="col">
-				 <ng-gauge  size="80" type="full" thick="3" min="0" max="100" value="dataCompleteness" cap="round" label=""  foreground-color="rgba(116,193,191, 0.8)" background-color="rgba(0,0,0, 0.2)" append=" %" ></ng-gauge>
-				<small class="pretty-thai-text">ข้อมูลสมบูรณ์</small>
-				<BR><BR>
-				<i class="material-icons green-text">&#xEB4A;</i><BR/>
-				 <small class="pretty-thai-text">สูบบุหรี่</small><BR/><BR/>
-				 <img src="img/ic_drink_2.png" class="opacity_img"><BR/>
-				 <small class="pretty-thai-text">ดิ่มแอลกอฮอล์</small>
+		<!--
+		<div class="row">
+			<div class="col ">
+				<h3 class="pretty-thai-text green-text padding-left">ยินดีต้อนรับ {{userObj.profile.firstname}} {{userObj.profile.lastname}}</h3>
 			</div>
-			<div class="col">
-				<img src="img/body_0.png">
+			<div class="col col-33 no-margin">
 			</div>
-			<div class="col">
-				<ng-gauge  size="80" type="full" thick="3" min="0" max="150" value="profile.age" cap="round" label=""  foreground-color="rgba(116,193,191, 0.8)" background-color="rgba(0,0,0, 0.2)" append=" ปี" ></ng-gauge>
-				 <BR/><small class="pretty-thai-text">อายุ</small>
-				 <BR/><BR/>
-				  <img src="img/ic_male.png" class="opacity_img"><BR/>
-				 <small class="pretty-thai-text">เพศ</small>
-				 
+		</div>
+		-->
+		<div class="padding">
+			<p class="dark-text center-text pretty-thai-text "> วันที่ {{toLongDate(todayTxt)}}</p>
+			  <div class="row"  class=" dark-text" align="center" on-swipe-left="loadData(tomorrowDate)" on-swipe-right="loadData(yesterdayDate)">
+				  <div class="col col-center" align="left" ><i class="icon ion-ios-arrow-back medium-icon dark-text"></i></div>
+				  <div class="col col-75 col-center dark-text" align="center">
+					  <ng-gauge  ng-if="totalCalories !=0" size="150" type="full" thick="6" min="0" max="10000" value="totalCalories" cap="round" label="Kcal"  foreground-color="rgba(163,246,240, 1)" background-color="rgba(0,0,0, 0.3)" append="" ></ng-gauge>
+					
+					<div ng-show="totalCalories == 0" >
+					  <div class="app-icon-small"></div>  
+					  <h4 class="dark-text pretty-thai-text">เลื่อนซ้ายขวาเพื่อเลือกวันที่</h4>
+					</div>
+					
+				  </div>
+				  <div class="col col-center" align="right"><i class="icon ion-ios-arrow-forward medium-icon dark-text"></i></div>
+			  </div>
+		</div>
+		<ion-list>
+		<ion-item class="item no-padding" ui-sref="app.listConsumption({mealtype: 'breakfast', cdate: todate})">
+		<div class="row inset-shadow-top" style="background-color: #56c4cf">
+		
+			<div class="col ">
+				<span class="pretty-thai-text medium-text light-text">{{toMealTxt("breakfast")}}</span>
 				
 			</div>
+			<div class="col">
+				<img src="img/meal-breakfast.png">
+			</div>
+			<div class="col col-33 col-center center-text pretty-slim-text">
+				<span ng-if="breakfastCalories !=0" class="big-text ">{{breakfastCalories}} <small>Kcal</small></span>
+				<span ng-if="breakfastCalories ==0" class="pretty-thai-text dark-text"><i class="material-icons">&#xE002;</i><BR>ยังไม่บันทึก</span>
+
+			</div>
+			
 		</div>
-		<div class="list" >
-				<div collection-repeat="summary in summaryList" class="padding-left">
-                <a class="item item-thumbnail-left item-icon-right" ng-if="summary.measures.length!=0"  ui-sref="app.addPatient">
-                    <img src="img/{{summary.category.icon}}_{{summary.level}}.png">
-					
-                    <h2 class="pretty-thai-text">{{summary.category.nameTH}}</h2>
-					<div class="row">
-						<div class="col" ng-if="summary.level == 0">
-						    <small class="pretty-thai-text">ปรกติ</small><BR/>
-							<i class="material-icons green-text">&#xE90F;</i>
-						</div>
-						<div class="col" ng-if="summary.level == 1">
-						    <small class="pretty-thai-text">เผ้าระวัง</small><BR/>
-							<i class="material-icons yellow-text">&#xE90F;</i>
-						</div>
-						<div class="col" ng-if="summary.level == 2">
-						    <small class="pretty-thai-text">เสี่ยง</small><BR/>
-							<i class="material-icons orange-text">&#xE90F;</i>
-						</div>
-						<div class="col" ng-if="summary.level == 3">
-						    <small class="pretty-thai-text">อันตราย</small><BR/>
-							<i class="material-icons red-text">&#xE90F;</i>
-						</div>
-						
-						<div class="col">
-						   <small class="pretty-thai-text">แนวโน้ม</small><BR/>
-						   <i class="material-icons dark">&#xE8E5;</i>
-						</div>
-					</div>
-					<i class="icon material-icons green-text">&#xE315;</i>
-                </a>
+		</ion-item>
+		<ion-item class="item no-padding" ui-sref="app.listConsumption({mealtype: 'lunch', cdate: todate})">
+		<div class="row inset-shadow-top" style="background-color: #dda35e" >
+			<div class="col">
+			
+				<span class="pretty-thai-text light-text medium-text">{{toMealTxt("lunch")}}</span>
+			</div>
+			<div class="col">
+				<img src="img/meal-lunch.png">
+			</div>
+			<div class="col col-33 col-center center-text pretty-slim-text">
+				<span ng-if="lunchCalories !=0" class="big-text ">{{lunchCalories}} <small>Kcal</small></span>
+				<span ng-if="lunchCalories ==0" class="pretty-thai-text dark-text"><i class="material-icons">&#xE002;</i><BR>ยังไม่บันทึก</span>
+			</div>
+		</div>
+		</ion-item>
+		<ion-item class="item no-padding" ui-sref="app.listConsumption({mealtype: 'dinner', cdate: todate})">
+		<div class="row inset-shadow-top" style="background-color: #aac163" >
+			<div class="col ">
+				<span class="pretty-thai-text light-text medium-text">{{toMealTxt("dinner")}}</span>
+			</div>
+			<div class="col">
+				<img src="img/meal-dinner.png">
+			</div>
+			<div class="col col-33 col-center center-text pretty-slim-text">
+				<span ng-if="dinnerCalories !=0" class="big-text ">{{dinnerCalories}} <small>Kcal</small></span>
+				<span ng-if="dinnerCalories ==0" class="pretty-thai-text dark-text"><i class="material-icons">&#xE002;</i><BR>ยังไม่บันทึก</span>
+
+			</div>
+		</div>
+		</ion-item>
+		<ion-item class="item no-padding" ui-sref="app.listConsumption({mealtype: 'snack', cdate: todate})">
+		<div class="row inset-shadow-top" style="background-color: #999"  >
+			<div class="col ">
+				<span class="pretty-thai-text light-text medium-text">{{toMealTxt("snack")}}</span>
+			</div>
+			<div class="col">
+				<img src="img/meal-snack.png">
+			</div>
+			<div class="col col-33 col-center center-text pretty-slim-text">
+				<span ng-if="snackCalories !=0" class="big-text ">{{snackCalories}} <small>Kcal</small></span>
+				<span ng-if="snackCalories ==0" class="pretty-thai-text dark-text"><i class="material-icons">&#xE002;</i><BR>ยังไม่บันทึก</span>
+
+			</div>
+		</div>
+		</ion-item>
+		</ion-list>
+		
+		
+		
+		<!--
+		<div >
+			<div class="row dark-text">
+			  <div class="col col-50" align="center"><a href="#/app/listConsumption/breakfast/{{todate}}" class="meallink dark-text bold-text narrow-text">Breakfast</a><BR/><ng-gauge size="85" type="arch" thick="5" min="0" max="10000" value="breakfastCalories" cap="round" label="Kcal"  foreground-color="rgba(255, 240, 169, 0.8)" background-color="rgba(255, 240, 169, 0.4)" append="" ></ng-gauge></div>
+			  <div class="col col-50" align="center"><a href="#/app/listConsumption/lunch/{{todate}}" class="dark-text bold-text narrow-text">Lunch</a><BR/><ng-gauge size="85" type="arch" thick="5" min="0" max="10000" value="lunchCalories" cap="round" label="Kcal"  foreground-color="rgba(254, 168, 178, 0.8)" background-color="rgba(254, 168, 178, 0.4)" append="" ></ng-gauge></div>
+				</div>
+			<div class="row dark-text">
+			  <div class="col col-50" align="center"><a href="#/app/listConsumption/dinner/{{todate}}" class="dark-text bold-text narrow-text">Dinner</a><BR/><ng-gauge size="85" type="arch" thick="5" min="0" max="10000" value="dinnerCalories" cap="round" label="Kcal"  foreground-color="rgba(204, 252, 167, 0.8)" background-color="rgba(204, 252, 167, 0.4)" append="" ></ng-gauge></div>
+			  <div class="col col-50" align="center"><a href="#/app/listConsumption/snack/{{todate}}" class="dark-text bold-text narrow-text">Snack</a><BR/><ng-gauge size="85" type="arch" thick="5" min="0" max="10000" value="snackCalories" cap="round" label="Kcal"  foreground-color="rgba(183, 175, 248, 0.8)" background-color="rgba(183, 175, 248, 0.4)" append="" ></ng-gauge></div>
 				</div>
 		</div>
-		<!--
-		<div class="list">
-                <a class="item item-thumbnail-left item-icon-right" ui-sref="app.addPatient">
-                    <img src="img/ic_body_0.png">
-					
-                    <h2 class="pretty-thai-text">ร่างกาย</h2>
-					<div class="row">
-						<div class="col">
-						    <small class="pretty-thai-text">ปรกติ</small><BR/>
-							<i class="material-icons green-text">&#xE90F;</i>
-						</div>
-						<div class="col">
-						   <small class="pretty-thai-text">แนวโน้ม</small><BR/>
-						   <i class="material-icons dark">&#xE8E5;</i>
-						</div>
-					</div>
-					<i class="icon material-icons green-text">&#xE315;</i>
-                </a>
-                <a class="item item-thumbnail-left item-icon-right">
-                    <img src="img/ic_heart_1.png">
-                    <h2 class="pretty-thai-text">ไหลเวียนโลหิต</h2>
-					<div class="row">
-						<div class="col">
-						    <small class="pretty-thai-text">เผ้าระวัง</small><BR/>
-							<i class="material-icons yellow-text">&#xE90F;</i>
-						</div>
-						<div class="col">
-						   <small class="pretty-thai-text">แนวโน้ม</small><BR/>
-						   <i class="material-icons dark">&#xE8E4;</i>
-						</div>
-					</div>
-					<i class="icon material-icons green-text">&#xE315;</i>
-                </a>
-                </a>
-                <a class="item item-thumbnail-left item-icon-right">
-                    <img src="img/ic_urinal_3.png">
-                    <h2 class="pretty-thai-text">ขับถ่าย</h2>
-					<div class="row">
-						<div class="col">
-						    <small class="pretty-thai-text">อันตราย</small><BR/>
-							<i class="material-icons orange-text">&#xE90F;</i>
-						</div>
-						<div class="col">	
-						   <small class="pretty-thai-text">แนวโน้ม</small><BR/>
-						   <i class="material-icons dark">&#xE8E3;</i>
-						</div>
-					</div>
-					<i class="icon material-icons green-text">&#xE315;</i>
-                </a>
-			</a>
-       </div>
-	   -->
+		-->
+			
     </ion-content>
 </ion-view>

@@ -2,40 +2,35 @@
     <ion-content ng-class="{expanded:isExpanded}" style="background: url(img/background-login.png) center; background-size: cover; align:center; vertical-align: middle;">
 	<div  class="im-wrapper ">
 		<div class="row">
-		<h2 class="col col-33 col-right col-center  pretty-slim-text"> <div class="app-icon"></div> </h2>
-		<h3 class="col col-right  pretty-thai-text dark-text ">ลงทะเบียนใช้งาน</h3>
+			<div class="col col-50 col-center "><div class="app-icon-small"></div></div>
+			<div class="col col-center"><h3 class="pretty-thai-text dark-text ">ลงทะเบียนใช้งาน</h3></div>
 		</div>
 		<form name="myForm" class="list" novalidate>
 			<p class="item pretty-thai-text dark-text">โปรดกรอกข้อมูลทั่วไป</p>
 			<div class="list rcorners" style="background: rgba(255, 255, 255, 0.8);">
 			
-			<label class="item item-input item-floating-label">
+			<label class="item item-input item-floating-label padding-left">
 				<span class="input-label pretty-thai-text green-text">ชื่อ</span>
 				<input type="text" class="pretty-thai-text" name="firstname" placeholder="ชื่อ" ng-model="formData.firstname" required>
 			</label>
-			<label class="item item-input item-floating-label">
+			<label class="item item-input item-floating-label padding-left">
 				<span class="input-label pretty-thai-text green-text">นามสกุล</span>
 				<input type="text" class="pretty-thai-text" name="lastname" placeholder="นามสกุล" ng-model="formData.lastname" required>
 			</label>
-			<label class="item item-input item-floating-label">
+			<label class="item item-input item-floating-label padding-left">
 				<span class="input-label pretty-thai-text green-text">เบอร์โทรศัพท์</span>
-				<input type="text" class="pretty-thai-text" name="phone" placeholder="เบอร์โทรศัพท์ (เช่น +66 099 9999999 ) " ng-model="formData.profile.phone"  ng-pattern="/^\+?\d{2}[- ]?\d{10}$/"  required>
+				<input type="text" class="pretty-thai-text" name="phone" placeholder="เบอร์โทรศัพท์ (เช่น  099 9999999 ) " ng-model="formData.profile.phone"  ng-pattern="/^\d{10}$/"  required>
 				
 			</label>
-			<label class="item item-input item-floating-label">
+			<label class="item item-input item-floating-label padding-left">
 				<span class="input-label pretty-thai-text green-text">อีเมล์</span>
 				<input type="email" class="pretty-thai-text" name="email" placeholder="อีเมล์ (เช่น user@email.com) " ng-model="formData.profile.email" required>
 			</label>
-			<div class="item item-icon-right" ion-datetime-picker date ng-model="formData.birthday" required>
-				  <div class="pretty-thai-text dark-text">วันเกิด: {{formData.birthday| date: "yyyy-MM-dd"}} </div>
+			<div class="item item-icon-right" ion-datetime-picker date ng-model="formData.profile.birthday" required>
+				  <div class="pretty-thai-text dark-text padding">วันเกิด: {{formData.profile.birthday| date: "yyyy-MM-dd"}} </div>
 				  <i class="icon ion-ios-calendar green-text"></i>
 			</div>
-			 <ion-multiple-select title="เชื้อชาติ" options="nationalitySelection" key-property="value" value-property="value" render-checkbox="false" class="item item-input item-icon-right">
-				<div class="pretty-thai-text">
-				  เชื้อชาติ {{getOptionsSelectedTxt(nationalitySelection, 'value', 'selected')}}
-				</div>
-				<i class="icon ion-ios-medical green-text"></i>
-			</ion-multiple-select>
+		
 			</div>
 			<BR/><BR/>
 			<div class="rcorners-orange"><div class="padding">
@@ -50,7 +45,7 @@
                     <i class="icon ion-key placeholder-icon"></i><input type="password"  class="pretty-thai-text right-text" ng-required="true" placeholder="ใส่รหัสผ่านอีกครั้ง"  ng-model="formData.repassword">
 				</label>
 			</div></div>
-			 <div class="list">
+			 <div class="list padding-top">
 				<p class="item pretty-thai-text dark-text" ng-show="myForm.$error.required">*  โปรดกรอกข้อมูลให้ครบ</p>
 				<p class="item pretty-thai-text dark-text" ng-show="myForm.$error.email">* โปรดกรอกอีเมล์ที่ถูกต้อง</p>
 				<p class="item pretty-thai-text dark-text" ng-show="myForm.phone.$error.pattern">* โปรดกรอกเบอร์โทรศัพท์ที่ถูกต้อง</p>

@@ -1,0 +1,93 @@
+<ion-view view-title="{{summary.category.nameTH}}">
+	<ion-nav-buttons side="left">
+		<button ui-sref="app.recordForm({categoryId: '{{categoryId}}'})"  class="button button-fab button-fab-top-right button-brand"><i class="icon ion-plus"></i></button>
+		<button ui-sref="app.recordList({categoryId: '{{categoryId}}'})" ng-show="isPreviewMode"  class="button button-icon button-clear button-green material-icons" >&#xE8EF;</button>
+	</ion-nav-buttons>
+    <ion-content  ng-class="{expanded:isExpanded}" >
+		<div id="preview" ng-show="isPreviewMode">
+			<div class="row" ng-if="summary.measures.length!=0" >
+				<div class="col col-33">
+					<img width="90%"  src="img/body_{{summary.category.code}}_{{summary.level}}.png">
+				</div>
+				 <div class="col">
+					<div class="row">
+						<div class="col" ng-if="summary.level == 0">
+							<small class="pretty-thai-text">ปรกติ</small><BR/>
+							<i class="material-icons green-text">&#xE90F;</i>
+						</div>
+						<div class="col" ng-if="summary.level == 1">
+							<small class="pretty-thai-text">เผ้าระวัง</small><BR/>
+							<i class="material-icons yellow-text">&#xE90F;</i>
+						</div>
+						<div class="col" ng-if="summary.level == 2">
+							<small class="pretty-thai-text">เสี่ยง</small><BR/>
+							<i class="material-icons orange-text">&#xE90F;</i>
+						</div>
+						<div class="col" ng-if="summary.level == 3">
+							<small class="pretty-thai-text">อันตราย</small><BR/>
+							<i class="material-icons red-text">&#xE90F;</i>
+						</div>
+						
+						<div class="col col-50">
+						   <small class="pretty-thai-text">แนวโน้ม</small><BR/>
+						   <i ng-if="summary.trend == 1" class="material-icons dark">&#xE8E5;</i>
+						   <i ng-if="summary.trend == 0" class="material-icons dark">&#xE8E4;</i>
+						   <i ng-if="summary.trend == -1" class="material-icons dark">&#xE8E3;</i>
+						</div>
+					</div>
+					<div class="row border-top padding-top"  ng-repeat="measure in summary.measures">
+							<div class="col">
+								<small class="pretty-thai-text">{{measure.measure.nameTH}}</small><BR/><BR/>
+								<div ng-switch="measure.level">
+									<span ng-switch-when="1" class="pretty-thai-text big-text yellow-text">{{measure.value}}</span>
+									<span ng-switch-when="2" class="pretty-thai-text big-text orange-text">{{measure.value}}</span>
+									<span ng-switch-when="3" class="pretty-thai-text big-text red-text">{{measure.value}}</span>
+									<span ng-switch-default class="pretty-thai-text big-text green-text">{{measure.value}}</span>
+								</div>
+								<small class="pretty-thai-text dark-text">{{measure.measure.unit}}</small>
+							</div>
+							<div ng-if="measure.measure.low1Value!=-9999 && measure.measure.high1Value!=9999" class="col col-center center-text padding-right" ng-switch="measure.level">
+								<i ng-switch-when="0" class="material-icons big-text green-text">&#xE90F;</i>
+								<i ng-switch-when="1" class="material-icons big-text yellow-text">&#xE90F;</i>
+								<i ng-switch-when="2" class="material-icons big-text orange-text">&#xE90F;</i>
+								<i ng-switch-when="3" class="material-icons big-text red-text">&#xE90F;</i>
+								<i ng-switch-default class="material-icons big-text green-text"></i>
+								<BR/><small class="pretty-thai-text dark">{{measure.labelTH}}</small>
+							</div>
+					</div>
+				</div>
+			</div>
+			<div class="padding" ng-repeat="measure in summary.measures">
+				<h4 class="pretty-thai-text green-text">{{measure.measure.nameTH}}</h4>
+				<span class="pretty-thai-text dark-text">{{measure.measure.descriptionTH}}</span>
+				<canvas id="line-{{measure.measure.code}}" class="chart chart-line padding" chart-colors="colors" chart-data="measure.values" chart-labels="measure.historyLabels" chart-series="measure.series" chart-options="options"></canvas>
+			</div>
+		</div>
+		
+		<div ng-show="isListMode">
+			<h4 class="pretty-thai-text padding-left green-text">รายการบันทึก<h4>
+			 <ion-list show-delete="false" can-swipe="true" ng-repeat="log in logList">
+				<ion-item class="list-item-content" href="#" class="item item-text-wrap" style="background-color: #FFF"  >
+					<div class="row"> 
+						<div class="col col-33">
+							<time datetime="{{log.logDate}}" class="icon">
+							  <em>{{log.logDay}}</em>
+							  <strong>{{log.logMonth}}</strong>
+							  <span>{{log.logDateNumber}}</span>
+							</time>
+						</div>
+						<div class="col col-center pretty-thai-text" ng-switch="log.source">
+							<h3 ng-switch-when="'manual'" class="pretty-thai-text green-text">บันทึกเอง</h3>
+							<h3 ng-switch-when="'integration'" class="pretty-thai-text green-text">นำเข้าจากโรงพยาบาล<BR/>{{log.integrationSource}}</h3>
+							<h3 ng-switch-default class="pretty-thai-text green-text">บันทึกเอง</h3>
+							<small>เวลา {{log.logTime}}</small>
+						</div>
+						<div class="col col-10 col-center right-text"><i class="icon ion-chevron-right green-text" ></i></div>
+					</div>
+					<ion-option-button class="button-green icon ion-edit"></ion-option-button>
+					<ion-option-button class="button-yellow icon ion-trash-a"></ion-option-button>
+				</ion-item>
+		</ion-list >
+    </ion-content>
+	
+</ion-view>

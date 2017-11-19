@@ -1,0 +1,29 @@
+<ion-view view-title="บันทึกค่าสุขภาพ">
+	<ion-nav-buttons side="left">
+	</ion-nav-buttons>
+    <ion-content ng-class="{expanded:isExpanded}">
+	<div  class="im-wrapper">
+		<form name="form"  novalidate >
+			<div class="list" ng-repeat="measure in measureList">
+				<div ng-if="! measure.calculation " class="item">
+					<h3 class="pretty-thai-text ">{{measure.nameTH}}</h3>
+					<div class="row no-margin"> 
+						<div class="col col-center pretty-thai-text">
+							<input type="text" class="big-text"  ng-model="measure.value" ng-pattern="/^[0-9]*$/" size="4">
+							<small>{{measure.unit}}</small>
+						</div>
+						<div class="col-66 col-center range range-positive">
+							<input ng-model="measure.value" type="range" name="volume" step="1" min="{{measure.minValue}}" max="{{measure.maxValue}}" >
+						</div>
+					</div>
+				</div>
+				
+			</div>
+			<p class="item pretty-thai-text dark-text" ng-show="form.$error.pattern">* โปรดกรอกค่าเป็นตัวเลขเท่านั้น</p>
+			<button ng-disabled="form.$invalid" class="button button-full button-yellow pretty-thai-text ink" ng-click="submit()"> บันทึก</button>
+		</form>
+		
+  <div>
+ 
+    </ion-content>
+</ion-view>

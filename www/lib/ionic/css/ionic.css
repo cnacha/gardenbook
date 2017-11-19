@@ -4635,7 +4635,6 @@ ion-tabs.tabs-color-active-dark .tab-item {
  */
 .item {
   border-color: #ddd;
-  background-color: #fff;
   color: #444;
   position: relative;
   z-index: 2;
@@ -4779,9 +4778,9 @@ a.item {
 .item-complex .item-content, .item-radio .item-content {
   position: relative;
   z-index: 2;
-  padding: 16px 49px 16px 16px;
+  padding: 10px 10px 10px 10px;  
   border: none;
-  background-color: white; }
+ }
 
 a.item-content {
   display: block;
@@ -6372,7 +6371,7 @@ input[type="radio"][disabled], input[type="checkbox"][disabled], input[type="rad
     top: 0;
     right: 0;
     padding: 14px 48px 16px 16px;
-    max-width: 65%;
+    /*max-width: 65%;*/
     border: none;
     background: #fff;
     color: #333;

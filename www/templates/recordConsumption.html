@@ -1,0 +1,139 @@
+<ion-view view-title="Record Consumption">
+    <ion-content ng-class="{expanded:isExpanded}">
+	<div  class="im-wrapper">
+		<form ng-hide="hideSearch == 'true'" name="searchForm" class="list" novalidate >
+			<div class="list">
+				<label class="item item-input item-floating-label">
+						<span class="input-label pretty-thai-text">Search Food - ค้นหาเมนุอาหาร</span>
+						<input type="text" class="pretty-thai-text" name="keyword" placeholder="Keyword - คำค้นหา" ng-model="keyword" required>
+				 </label>
+				</div>
+
+		<div class="row">
+			<button class="button button-full button-positive-900 ink" ng-click="searchFood(keyword)" ng-disabled="searchForm.$invalid" >
+                    Search
+             </button>
+		</div>
+		</form>
+		<div ng-show="selectFood == 'true'">
+		    <h4>Results</h4>
+          <span ng-show="resultList.length == 0">No Food Matching for {{keyword}} </span>
+          <div class="list" ng-repeat="item in resultList">
+
+              <button ng-click="newRecord(item)" class="button button-block icon-right button-stable ion-android-create pretty-thai-text">{{item.name}}</button>
+          <!--    <div class="col col-10 col-center" ><button id="menu-food" ng-click="newRecord(item)" class="button button-fab button-shade4 icon ion-plus"></button></div>
+              <div class="col col-center">{{item.name}}</div>
+          -->
+
+          </div>
+		</div>
+  <div>
+  <div ng-show="recordFood == 'true'" class="stable-bg">
+		<form name="myForm" class="list" novalidate>
+      <div class="row">
+        <div class="col dark-text pretty-text" align="center">Calories Intake<BR/><ng-gauge size="85" type="full" thick="7" min="0" max="5000" value="selectedFood.calories" cap="round" label="Kcal"  foreground-color="#3399cc" background-color="rgba(183, 175, 248, 0.7)" append="" ></ng-gauge></span>
+        </div>
+
+      <div class="col list">
+			 <label class="item item-input item-floating-label">
+                    <input type="tel" name="foodName" placeholder="Food Name" ng-model="selectedFood.name" required>
+        </label>
+        <label class="item item-input item-floating-label">
+                     <span class="input-label pretty-text small-text">มื้ออาหาร</span>
+                     <select name="mealType" ng-model="selectedFood.mealType" required>
+                      <option value="breakfast">มื้อเช้า</option>
+                      <option value="lunch">มื้อกลางวัน</option>
+                      <option value="dinner">มื้อเย็น</option>
+                      <option value="snack">อื่นๆ</option>
+                    </select>
+                  <!--   <input type="tel" name="mealType" placeholder="Meal" ng-model="selectedFood.mealType" required>
+                  -->
+         </label>
+			 <label class="item item-input item-floating-label">
+                    <span class="input-label pretty-text small-text">Number - จำนวน ({{selectedItem.unitName}})</span>
+                    <input type="number" name="unitCount" ng-change="recal()" placeholder="Number - จำนวน" ng-model="selectedFood.unitCount" required>
+
+			 </label>
+     </div>
+    <!-- <div class="col col-top "><a class="right-padding" ng-click="toggleResult()"><i class="icon ion-close"></i></a></div> -->
+   </div>
+   <div class="button-bar">
+   <button class="button button-full button-balanced ink" ng-disabled="myForm.$invalid" ng-click="toggleResult()" >
+                Cancel
+    </button>
+    <button class="button button-full button-calm ink" ng-disabled="myForm.$invalid" ng-click="submit()" >
+                 Record
+     </button>
+  </div>
+<!--
+			 <ion-multiple-select title="Select Building" options="bdList" key-property="buildingId" value-property="name" render-checkbox="false" class="item item-input item-icon-right">
+					<div class="input-label">
+						Building - อาคาร
+					</div>
+					<i class="icon ion-android-locate assertive"></i>
+			</ion-multiple-select>
+			<div class="padding">{{getOptionsSelectedTxt(bdList, 'name', 'selected')}}</div>
+			 <label class="item item-input item-floating-label">
+                    <span class="input-label">Room - ห้อง</span>
+                    <input type="text" name="roomNumber" placeholder="Room - ห้อง" ng-model="formData.roomNumber" required>
+             </label>
+
+			 <BR/>
+			 <h4><i class="icon ion-android-calendar larger"></i> Convenient Time - วันเวลาที่สะดวก </h4>
+			<div class="item item-icon-right" ion-datetime-picker date ng-model="formData.maintenanceDate">
+				  <div class="padding">{{formData.maintenanceDate| date: "yyyy-MM-dd"}} </div>
+					<i class="icon ion-ios-calendar assertive"></i>
+			</div>
+            <div class="center">
+				<label class="item item-radio">
+						<input type="radio" name="group" ng-model="formData.maintenanceTimePeriod" value="1">
+						<div class="item-content">
+							Morning - เช้า
+						</div>
+						<i class="radio-icon ion-checkmark"></i>
+					</label>
+					<label class="item item-radio">
+						<input type="ra			 </div>
+dio" name="group" ng-model="formData.maintenanceTimePeriod" value="2">
+						<div class="item-content">
+						   Afternoon - บ่าย
+						</div>
+						<i class="radio-icon ion-checkmark"></i>
+				</label>
+			</div>
+			<h4 class="border-top"><i class="icon ion-compose larger"></i> Service Details</h4>
+			 <div>
+			   <ion-multiple-select title="Select Services" options="selectServ" key-property="descId" value-property="name" selected-property="selected" class="item item-input item-icon-right">
+					<div class="input-label">
+						Services
+					</div>
+					<i class="icon ion-compose assertive"></i>
+				</ion-multiple-select>
+				 <div class="padding">
+					<p ng-repeat="it in getOptionsSelected(selectServ, 'name', 'selected')">
+						<i class="icon ion-android-alert assertive larger"></i> {{it.name}}
+					</p>
+				 </div>
+
+			 </div>
+			 <label class="item item-input item-floating-label">
+                    <span class="input-label">Error details - รายละเอียดความผิดพลาด</span>
+                    <input type="text" name="error" placeholder="Error details - รายละเอียดความผิดพลาด" ng-model="formData.errorMessage">
+             </label>
+			 <label class="item item-input item-floating-label">
+                    <span class="input-label">Other details - รายละเอียดอื่นๆ</span>
+                    <input type="text" name="other" placeholder="Other details - รายละเอียดอื่นๆ" ng-model="formData.other">
+             </label>
+			 <div class="padding smaller assertive">
+				<p ng-show="myForm.assetNo.$error.required">* Asset No. is required</p>
+				<p ng-show="myForm.contactTel.$error.required">* Telephone is required</p>
+				<p ng-show="myForm.roomNumber.$error.required">* Room No. is required</p>
+				<p ng-show="getOptionsSelectedTxt(selectServ, 'name', 'selected') == ''">* At least 1 service need to be selected</p>
+			</div>
+
+-->
+
+		</form>
+  </div>
+    </ion-content>
+</ion-view>
