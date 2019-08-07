@@ -1,114 +1,18 @@
-<ion-view view-title="บันทึกแคลอรี่">
-	<ion-nav-buttons side="left">
-                <button class="button button-icon button-clear ion ion-log-out" ui-sref="app.logout">
-                </button>
-     </ion-nav-buttons>
+<ion-view view-title="Garden Book: Pahiopedilum ">
     <ion-content  ng-class="{expanded:$scope.isExpanded}" style="background: url(img/background.png) center; background-size: cover; align:center; vertical-align: middle;">
-		<!--
-		<div class="row">
-			<div class="col ">
-				<h3 class="pretty-thai-text green-text padding-left">ยินดีต้อนรับ {{userObj.profile.firstname}} {{userObj.profile.lastname}}</h3>
-			</div>
-			<div class="col col-33 no-margin">
-			</div>
-		</div>
-		-->
+	
 		<div class="padding">
-			<p class="dark-text center-text pretty-thai-text "> วันที่ {{toLongDate(todayTxt)}}</p>
-			  <div class="row"  class=" dark-text" align="center" on-swipe-left="loadData(tomorrowDate)" on-swipe-right="loadData(yesterdayDate)">
-				  <div class="col col-center" align="left" ><i class="icon ion-ios-arrow-back medium-icon dark-text"></i></div>
-				  <div class="col col-75 col-center dark-text" align="center">
-					  <ng-gauge  ng-if="totalCalories !=0" size="150" type="full" thick="6" min="0" max="10000" value="totalCalories" cap="round" label="Kcal"  foreground-color="rgba(163,246,240, 1)" background-color="rgba(0,0,0, 0.3)" append="" ></ng-gauge>
-					
-					<div ng-show="totalCalories == 0" >
-					  <div class="app-icon-small"></div>  
-					  <h4 class="dark-text pretty-thai-text">เลื่อนซ้ายขวาเพื่อเลือกวันที่</h4>
-					</div>
-					
-				  </div>
-				  <div class="col col-center" align="right"><i class="icon ion-ios-arrow-forward medium-icon dark-text"></i></div>
-			  </div>
-		</div>
-		<ion-list>
-		<ion-item class="item no-padding" ui-sref="app.listConsumption({mealtype: 'breakfast', cdate: todate})">
-		<div class="row inset-shadow-top" style="background-color: #56c4cf">
-		
-			<div class="col ">
-				<span class="pretty-thai-text medium-text light-text">{{toMealTxt("breakfast")}}</span>
-				
+			
+			<button ng-click="takeImage(true)" class="button button-block  pretty-thai-text icon-left ion-camera button-yellow ink">Take Picture - ถ่ายภาพ </button>
+			<button ng-click="takeImage(false)" class="button button-block pretty-thai-text icon-left ion-images button-orange ink">Select Picture - เลือกรูป</button>
+			<div class="padding center-text" ng-if="bestResult != null">
+				<h2 class="pretty-slim-text"> {{bestResult}}</h2>
+				<h3 class="pretty-thai-text"> {{nameToThai(bestResult)}}</h3>
+				<img width="250px" src="{{imageURL}}">
 			</div>
-			<div class="col">
-				<img src="img/meal-breakfast.png">
-			</div>
-			<div class="col col-33 col-center center-text pretty-slim-text">
-				<span ng-if="breakfastCalories !=0" class="big-text ">{{breakfastCalories}} <small>Kcal</small></span>
-				<span ng-if="breakfastCalories ==0" class="pretty-thai-text dark-text"><i class="material-icons">&#xE002;</i><BR>ยังไม่บันทึก</span>
-
-			</div>
+			<p class="pretty-thai-text"> {{describeThai(bestResult)}}</p>
 			
 		</div>
-		</ion-item>
-		<ion-item class="item no-padding" ui-sref="app.listConsumption({mealtype: 'lunch', cdate: todate})">
-		<div class="row inset-shadow-top" style="background-color: #dda35e" >
-			<div class="col">
-			
-				<span class="pretty-thai-text light-text medium-text">{{toMealTxt("lunch")}}</span>
-			</div>
-			<div class="col">
-				<img src="img/meal-lunch.png">
-			</div>
-			<div class="col col-33 col-center center-text pretty-slim-text">
-				<span ng-if="lunchCalories !=0" class="big-text ">{{lunchCalories}} <small>Kcal</small></span>
-				<span ng-if="lunchCalories ==0" class="pretty-thai-text dark-text"><i class="material-icons">&#xE002;</i><BR>ยังไม่บันทึก</span>
-			</div>
-		</div>
-		</ion-item>
-		<ion-item class="item no-padding" ui-sref="app.listConsumption({mealtype: 'dinner', cdate: todate})">
-		<div class="row inset-shadow-top" style="background-color: #aac163" >
-			<div class="col ">
-				<span class="pretty-thai-text light-text medium-text">{{toMealTxt("dinner")}}</span>
-			</div>
-			<div class="col">
-				<img src="img/meal-dinner.png">
-			</div>
-			<div class="col col-33 col-center center-text pretty-slim-text">
-				<span ng-if="dinnerCalories !=0" class="big-text ">{{dinnerCalories}} <small>Kcal</small></span>
-				<span ng-if="dinnerCalories ==0" class="pretty-thai-text dark-text"><i class="material-icons">&#xE002;</i><BR>ยังไม่บันทึก</span>
-
-			</div>
-		</div>
-		</ion-item>
-		<ion-item class="item no-padding" ui-sref="app.listConsumption({mealtype: 'snack', cdate: todate})">
-		<div class="row inset-shadow-top" style="background-color: #999"  >
-			<div class="col ">
-				<span class="pretty-thai-text light-text medium-text">{{toMealTxt("snack")}}</span>
-			</div>
-			<div class="col">
-				<img src="img/meal-snack.png">
-			</div>
-			<div class="col col-33 col-center center-text pretty-slim-text">
-				<span ng-if="snackCalories !=0" class="big-text ">{{snackCalories}} <small>Kcal</small></span>
-				<span ng-if="snackCalories ==0" class="pretty-thai-text dark-text"><i class="material-icons">&#xE002;</i><BR>ยังไม่บันทึก</span>
-
-			</div>
-		</div>
-		</ion-item>
-		</ion-list>
-		
-		
-		
-		<!--
-		<div >
-			<div class="row dark-text">
-			  <div class="col col-50" align="center"><a href="#/app/listConsumption/breakfast/{{todate}}" class="meallink dark-text bold-text narrow-text">Breakfast</a><BR/><ng-gauge size="85" type="arch" thick="5" min="0" max="10000" value="breakfastCalories" cap="round" label="Kcal"  foreground-color="rgba(255, 240, 169, 0.8)" background-color="rgba(255, 240, 169, 0.4)" append="" ></ng-gauge></div>
-			  <div class="col col-50" align="center"><a href="#/app/listConsumption/lunch/{{todate}}" class="dark-text bold-text narrow-text">Lunch</a><BR/><ng-gauge size="85" type="arch" thick="5" min="0" max="10000" value="lunchCalories" cap="round" label="Kcal"  foreground-color="rgba(254, 168, 178, 0.8)" background-color="rgba(254, 168, 178, 0.4)" append="" ></ng-gauge></div>
-				</div>
-			<div class="row dark-text">
-			  <div class="col col-50" align="center"><a href="#/app/listConsumption/dinner/{{todate}}" class="dark-text bold-text narrow-text">Dinner</a><BR/><ng-gauge size="85" type="arch" thick="5" min="0" max="10000" value="dinnerCalories" cap="round" label="Kcal"  foreground-color="rgba(204, 252, 167, 0.8)" background-color="rgba(204, 252, 167, 0.4)" append="" ></ng-gauge></div>
-			  <div class="col col-50" align="center"><a href="#/app/listConsumption/snack/{{todate}}" class="dark-text bold-text narrow-text">Snack</a><BR/><ng-gauge size="85" type="arch" thick="5" min="0" max="10000" value="snackCalories" cap="round" label="Kcal"  foreground-color="rgba(183, 175, 248, 0.8)" background-color="rgba(183, 175, 248, 0.4)" append="" ></ng-gauge></div>
-				</div>
-		</div>
-		-->
 			
     </ion-content>
 </ion-view>

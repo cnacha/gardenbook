@@ -9,71 +9,13 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ionic-material','ion
 .run(function($ionicPlatform, $ionicLoading,$rootScope,$timeout) {
 	
     $ionicPlatform.ready(function() {
-		// ChartJS
-        Chart.defaults.global.defaultFontColor = 'rgba(0, 0, 0, 0.8)';
-		Chart.defaults.global.defaultFontFamily = "'Prompt', sans-serif";
-		Chart.defaults.global.elements.point.radius = 5;
-		Chart.defaults.global.elements.point.hitRadius = 5
-		Chart.defaults.global.elements.point.borderColor = '#FFF';
-		Chart.defaults.global.elements.point.borderWidth = 2;
-		Chart.defaults.global.elements.point.backgroundColor = '#78ffff';
-		Chart.defaults.global.defaultFontSize = 12;
-		Chart.defaults.global.legend.labels.boxWidth = 20;
-		Chart.defaults.global.colors  =  ['#83b5c4','#306c81','#a3dcdf','#c5dce6','#78ffff','#2ba8cd','#2c6376','#95c8cb','#b4c8d2','#6ee8e8'];
-		// Push Notification
-		var push = PushNotification.init({
-			android: {
-				"senderID": "358620280542",
-				"iconColor": "#343434",
-				"forceShow" : false
-			},
-			ios: {
-				"senderID": "358620280542",
-				"alert": true,
-				"badge": true,
-				"sound": true
-			},
-			browser: {
-				pushServiceURL: 'http://push.api.phonegap.com/v1/push'
-			}
-		});
-		push.on('registration', function(data) {
-		  console.log("registrationId "+data.registrationId);
-		  $rootScope.tokenId = data.registrationId;
-		});
-		push.on('notification', function ( data) {
-			if($rootScope.isNotificationCalled == undefined ||  !$rootScope.isNotificationCalled){
-				$rootScope.isNotificationCalled = true;
-				var alertPopup = $ionicPopup.alert({
-					title: "ข้อความเตือน",
-					template: data.message,
-					 buttons: [
-					  { text: 'OK',  onTap: function(e) {
-							  console.log(e);
-							  $rootScope.isNotificationCalled = false;
-							  return true; 
-							} 
-					   }
-					 ]
-				});
-			}
-			
-		});
+
 		 // TensorFlow
-        var tf = new TensorFlow('food-model', {
+		 
+       var tf = new TensorFlow('orchid-model', {
             'label': 'My Custom Model',
-            'model_path': "https://storage.googleapis.com/ha-models/food_model_v4.zip#output_graph_round_v4.pb",
-            'label_path': "https://storage.googleapis.com/ha-models/food_model_v4.zip#output_labels_v4.txt",
-            'input_size': 299,
-            'image_mean': 128,
-            'image_std': 128,
-            'input_name': 'Mul',
-            'output_name': 'final_result'
-        })
-       var tf = new TensorFlow('food-model', {
-            'label': 'My Custom Model',
-            'model_path': "https://storage.googleapis.com/ha-models/food_model_v4.zip#output_graph_round_v4.pb",
-            'label_path': "https://storage.googleapis.com/ha-models/food_model_v4.zip#output_labels_v4.txt",
+            'model_path': "https://storage.googleapis.com/orchid-model/orchid_model_v2.zip#rounded_graph.pb",
+            'label_path': "https://storage.googleapis.com/orchid-model/orchid_model_v2.zip#output_labels.txt",
             'input_size': 299,
             'image_mean': 128,
             'image_std': 128,
@@ -83,7 +25,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ionic-material','ion
         tf.onprogress = function(evt) {
           
           if (evt['status'] == 'downloading'){
-			  $ionicLoading.show({template: "Please wait a moment<BR/>We are downloading food prediction model...<BR/>"+evt.label});
+			  $ionicLoading.show({template: "Downloading prediction model...<BR/>"+evt.label});
               console.log("Downloading model files...");
               console.log(evt.label);
               if (evt.detail) {
@@ -106,29 +48,12 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ionic-material','ion
             $rootScope.tf = tf;
         });
 		
+		
     });
 })
 
 .config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider,$ionicCloudProvider) {
-	/**
-	$ionicCloudProvider.init({
-        "core": {
-            "app_id": "6246a58a"
-        },
-        "push": {
-            "sender_id": "1091753368379",
-            "pluginConfig": {
-                "ios": {
-                "badge": true,
-                "sound": true
-                },
-                "android": {
-                "iconColor": "#343434"
-                }
-            }
-        }
-    });
-	**/
+
 	
     // Turn off caching for demo simplicity's sake
     $ionicConfigProvider.views.maxCache(0);
@@ -177,103 +102,17 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ionic-material','ion
 	})
 
     .state('app.home', {
-        url: '/home/:cdate',
+        url: '/home',
         views: {
             'menuContent': {
                 templateUrl: 'templates/home.html',
                 controller: 'HomeCtrl'
-            },
-             'fabContent': {
-                template: '<button id="fab-camrecord" ng-click="takeImage()" class="button button-fab button-fab-top-right button-calm spin"><i class="icon ion-image"></i></button>',
-                controller: function ($timeout) {
-                    $timeout(function () {
-                        document.getElementById('fab-camrecord').classList.toggle('on');
-                    }, 800);
-
-                }
-
             }
         }
-    })
-	
-	.state('app.listConsumption', {
-         url: '/listConsumption/:mealtype/:cdate',
-         views: {
-             'menuContent': {
-                 templateUrl: 'templates/listConsumption.html',
-                 controller: 'listConsumptionCtrl'
-             },
-             'fabContent': {
-               template: '<button id="fab-record" ng-click="newrecord()" class="button button-fab button-fab-bottom-right button-calm spin"><i class="icon ion-plus"></i></button>',
-               controller: function ($timeout) {
-                   $timeout(function () {
-                       document.getElementById('fab-record').classList.toggle('on');
-                   }, 800);
-
-               }
-             }
-        }
-     })
-	 
-	 .state('app.recordConsumption', {
-        url: '/recordConsumption/:mealtype/:cdate',
-        views: {
-            'menuContent': {
-                templateUrl: 'templates/recordConsumption.html',
-                controller: 'RecordConsumptionCtrl'
-            },
-            'fabContent': {}
-            }
-    })
-
-	
-	.state('app.category', {
-        url: '/category/:categoryId',
-        views: {
-            'menuContent': {
-                templateUrl: 'templates/categoryBody.html',
-                controller: 'CategoryCtrl'
-            },
-            'fabContent': {}
-        }
-    })
-	
-	.state('app.recordList', {
-        url: '/category/:categoryId',
-        views: {
-            'menuContent': {
-                templateUrl: 'templates/recordList.html',
-                controller: 'RecordListCtrl'
-            },
-            'fabContent': {}
-        }
-    })
-	
-	.state('app.recordForm', {
-        url: '/recordForm/:categoryId',
-        views: {
-            'menuContent': {
-                templateUrl: 'templates/recordForm.html',
-                controller: 'RecordFormCtrl'
-            },
-            'fabContent': {}
-				
-        }
-    })
-	
-	 .state('app.register', {
-        url: '/register',
-        views: {
-            'menuContent': {
-                templateUrl: 'templates/register.html',
-                controller: 'RegisterCtrl'
-            },
-            'fabContent': {}
-            }
     })
 	
 	
 
     // if none of the above states are matched, use this as the fallback
-    $urlRouterProvider.otherwise('/app/login');
+    $urlRouterProvider.otherwise('/app/home');
 });

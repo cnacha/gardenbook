@@ -1,11 +1,11 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.telabase.fooddiary" version="0.0.3" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>Food Diary</name>
+<widget id="com.telabase.gardenbook" version="0.0.5" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>Garden Book</name>
     <description>
         An Ionic Framework and Cordova project.
     </description>
     <author email="cnacha@gmail.com" href="http://ionicframework.com/">
-     Smart Health Care Global
+    Garden Book - MFU Research
     </author>
     <content src="index.html" />
     <access origin="*" />
@@ -16,6 +16,7 @@
     <preference name="ShowSplashScreen" value="true" />
     <preference name="AutoHideSplashScreen" value="true" />
     <preference name="SplashShowOnlyFirstTime" value="false" />
+    <preference name="orientation" value="portrait" />
     <preference name="FadeSplashScreen" value="false" />
     <preference name="SplashScreen" value="screen" />
     <preference name="ShowSplashScreenSpinner" value="true" />
